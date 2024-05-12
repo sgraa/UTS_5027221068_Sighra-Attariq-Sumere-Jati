@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package CalendarPackage;
+
+service CalendarService {
+  rpc GetAllEvents (Empty) returns (Events) {};
+  rpc GetEventByID (EventID) returns (Event) {};
+  rpc AddEvent (Event) returns (Response) {};
+  rpc UpdateEvent (EventWithID) returns (Response) {};
+  rpc DeleteEvent (EventID) returns (Response) {};
+}
+
+message Event {
+  string date = 1;
+  string desc = 2;
+}
+
+message EventID {
+  string id = 1;
+}
+
+message Events {
+  repeated Event events = 1;
+}
+
+message EventWithID {
+  EventID eventId = 1;
+  Event event = 2;
+}
+
+message Response {
+  string code = 1;
+  string message = 2;
+  Event event = 3;
+}
+
+message Empty {}
